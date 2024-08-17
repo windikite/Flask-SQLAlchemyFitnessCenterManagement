@@ -57,6 +57,11 @@ def get_member():
     members = Member.query.all()
     return members_schema.jsonify(members)
 
+@app.route('/members/<int:id>', methods=['GET'])
+def get_member_by_id(id):
+    member = Member.query.get_or_404(id)
+    return member_schema.jsonify(member)
+
 @app.route('/members', methods=['POST'])
 def add_member():
     try:
@@ -97,6 +102,11 @@ def delete_member(id):
 def get_workout_session():
     workout_sessions = WorkoutSession.query.all()
     return workout_sessions_schema.jsonify(workout_sessions)
+
+@app.route('/sessions/<int:id>', methods=['GET'])
+def get_workout_session_by_session_id(id):
+    session = WorkoutSession.query.get_or_404(id)
+    return workout_session_schema.jsonify(session)
 
 @app.route('/sessions_by_member/<int:id>', methods=['GET'])
 def get_workout_sessions_by_member(id):
